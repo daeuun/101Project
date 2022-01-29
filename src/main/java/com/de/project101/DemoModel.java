@@ -1,4 +1,4 @@
-package com.de.project;
+package com.de.project101;
 
 import lombok.Builder;
 import lombok.NonNull;

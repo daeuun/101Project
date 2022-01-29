@@ -1,4 +1,4 @@
-package com.de.project.dto;
+package com.de.project101.dto;
 
 import java.util.List;
 

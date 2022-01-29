@@ -1,4 +1,4 @@
-package com.de.project.controller;
+package com.de.project101.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.de.project.dto.ResponseDTO;
-import com.de.project.dto.TestRequestBodyDTO;
+import com.de.project101.dto.ResponseDTO;
+import com.de.project101.dto.TestRequestBodyDTO;
 
 @RestController
 @RequestMapping("test") // 리소스  

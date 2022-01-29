@@ -1,25 +1,31 @@
-package com.de.project.controller;
+package com.de.project101.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.de.project.dto.ResponseDTO;
+import com.de.project101.dto.ResponseDTO;
+import com.de.project101.service.TodoService;
 
 @RestController
 @RequestMapping("todo")
 public class TodoController {
 	
-	@GetMapping("/todoResponseEntity")
-	public ResponseEntity<?> todoControllerResponseEntity() {
+	@Autowired
+	private TodoService service;
+	
+	@GetMapping("/test")
+	public ResponseEntity<?> testTodo() {
+		String str = service.testService(); // 테스트 서비스 사용  
 		List<String> list = new ArrayList<>();
-		list.add("todo ResponseEntity");
+		list.add(str);
 		ResponseDTO<String> response = ResponseDTO.<String>builder().data(list).build();
-		return ResponseEntity.badRequest().body(response);
+		return ResponseEntity.ok().body(response);
 	}
 
 
