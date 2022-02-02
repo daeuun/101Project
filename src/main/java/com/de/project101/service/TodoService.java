@@ -1,6 +1,7 @@
 package com.de.project101.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,29 @@ public class TodoService {
 			log.warn("Unknown user.");
 			throw new RuntimeException("Unknown user.");
 		}
+	}
+	
+	public List<TodoEntity> retrieve(final String userId) {
+		return repository.findByUserId(userId);
+	}
+	
+	public List<TodoEntity> update(final TodoEntity entity) {
+		// (1) 저장할 엔티티가 유효한지 확인한다. 
+		validate(entity);
+		
+		// (2) 넘겨받은 엔티티 id를 이용해 TodoEntity를 가져온다. 존재하지 않는 엔티티는 업데이트할 수 없기 때문!
+		final Optional<TodoEntity> original = repository.findById(entity.getId());
+		
+		original.ifPresent(todo -> {
+			// (3) 반환된 TodoEntity가 존재하면 값을 새 Entity 값로 덮어씌운다.
+			todo.setTitle(entity.getTitle());
+			todo.setDone(entity.isDone());
+
+			// (4) DB에 새 값을 저장한다.
+			repository.save(todo);
+		});
+		
+		// retrieve Todo에서 만든 메서드를 이용해 사용자의 모든 Todo 리스트를 리턴한다.
+		return retrieve(entity.getUserId());
 	}
 }
